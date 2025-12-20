@@ -426,4 +426,21 @@ footer { padding: 50px 0; text-align: center; background: var(--dark); color: wh
 }
 
 }
+/* Animation de zoom automatique (battement) pour l'ebook */
+.book-3d {
+    animation: pulse-zoom 3s ease-in-out infinite;
+}
+
+@keyframes pulse-zoom {
+    0% {
+        transform: scale(1) rotateY(-10deg); /* Taille normale */
+    }
+    50% {
+        transform: scale(1.08) rotateY(-5deg); /* S'agrandit de 8% */
+    }
+    100% {
+        transform: scale(1) rotateY(-10deg); /* Revient à la taille normale */
+    }
+    }
+        
 
