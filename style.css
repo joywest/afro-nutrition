@@ -86,15 +86,16 @@ section { padding: 100px 0; }
 
 .pricing-card { background: white; padding: 50px; border-radius: 25px; box-shadow: var(--shadow); text-align: center; max-width: 550px; margin: 0 auto; }
 .price {
-    font-size: 3.5rem;
+    font-size: 2.5rem;      /* On réduit de 3.5rem à 2.5rem */
     font-weight: 800;
     color: var(--secondary);
     margin: 15px 0;
-    display: flex;          /* Ajoute cette ligne */
-    align-items: center;    /* Ajoute cette ligne */
-    justify-content: center; /* Ajoute cette ligne */
-    gap: 15px;              /* Ajoute cette ligne pour l'espace */
+    display: flex;
+    align-items: baseline;  /* Aligne le bas des textes */
+    justify-content: center;
+    gap: 10px;
 }
+
 
 .price span { font-size: 1.4rem; text-decoration: line-through; color: #aaa; margin-left: 10px; }
 
@@ -425,3 +426,4 @@ footer { padding: 50px 0; text-align: center; background: var(--dark); color: wh
 }
 
 }
+
