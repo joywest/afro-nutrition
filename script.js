@@ -1,9 +1,9 @@
 /**
  * Logique de la Landing Page - Nutrition Sportive Africaine
- * Version Finale : Paiement Direct WhatsApp + Slider + Animations 3D
+ * Version Finale : Paiement Direct WhatsApp + Slider + Animations 3D + Code Promo
  */
+
 // 1. Empêche le navigateur de mémoriser la position du défilement
-// On force le mode manuel pour le défilement
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
@@ -11,15 +11,16 @@ if ('scrollRestoration' in history) {
 // On remonte tout en haut immédiatement
 window.scrollTo(0, 0);
 
-// On nettoie l'URL pour supprimer l'ancre (#prix) AVANT que la page ne se recharge complètement
+// On nettoie l'URL pour supprimer l'ancre (#prix)
 if (window.location.hash) {
     window.history.replaceState('', document.title, window.location.pathname);
 }
 
-// Sécurité supplémentaire : au chargement complet, on confirme la position 0
+// Sécurité supplémentaire au chargement
 window.addEventListener('load', () => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
 });
+
 // --- 1. GESTION DU PAIEMENT (Mobile Money & International) ---
 let selectedMethod = "";
 
@@ -48,7 +49,7 @@ function togglePaymentInfo(method) {
     }
     else if (method === 'inter') {
         title.innerHTML = "<strong>Paiement International (Hors Congo) :</strong>";
-        phone.innerText = "‪+242 06 574 93 58‬";
+        phone.innerText = "+242 06 574 93 58";
         name.innerText = "Balleya Joy Ephraim";
         if(finalStepText) finalStepText.innerText = "Utilisez Sendwave, WorldRemit ou TapTap Send vers mon numéro MTN Congo, puis envoyez la capture d'écran.";
     }
@@ -58,16 +59,24 @@ function togglePaymentInfo(method) {
 }
 
 function sendWhatsAppConfirmation() {
+    // RÉCUPÉRATION DU CODE PROMO
+    const inputPromo = document.getElementById('promoCode');
+    const codePromo = inputPromo ? inputPromo.value.trim().toUpperCase() : "";
+
     // Format international strict pour le Congo : 242 + numéro sans le +
     const monNumero = "242065749358"; 
     
     // On s'assure d'avoir une méthode de paiement définie
     const methodeAffichee = selectedMethod || "Mobile Money";
 
-    // Message personnalisé
-    const message = `Bonjour Ephraim, je viens de payer 3 500 F par ${methodeAffichee} pour l'ebook. Voici ma capture d'écran pour recevoir mon livre.`;
+    // Message personnalisé avec intégration du Code Promo
+    let message = `Bonjour Ephraim, je viens de payer 3 500 F par ${methodeAffichee} pour l'ebook. Voici ma capture d'écran pour recevoir mon livre.`;
     
-    // Lien wa.me universel (évite l'erreur 404)
+    if (codePromo !== "") {
+        message += `\n\n Code Promo utilisé : ${codePromo}`;
+    }
+    
+    // Lien wa.me universel
     const url = "https://wa.me/" + monNumero + "?text=" + encodeURIComponent(message);
     
     window.open(url, '_blank');
@@ -147,21 +156,26 @@ if (bookCover) {
 
     document.querySelector('.hero').addEventListener('mouseleave', () => {
         bookCover.style.transform = `rotateY(-25deg) rotateX(5deg)`;
-});
-}// Compte à rebours fictif (se réinitialise à chaque visite ou tourne en boucle)
+    });
+}
+
+// --- 5. COMPTE À REBOURS ---
 function startCountdown() {
     let time = 14 * 3600 + 22 * 60 + 5;
     setInterval(() => {
         time--;
-        if (time <= 0) time = 14 * 3600 + 22 * 60 + 5; // Relance le cycle
+        if (time <= 0) time = 14 * 3600 + 22 * 60 + 5; 
         
         let h = Math.floor(time / 3600);
         let m = Math.floor((time % 3600) / 60);
         let s = time % 60;
         let clock = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
         
-        document.getElementById("countdown").innerHTML = clock;
-        document.getElementById("countdown2").innerHTML = clock;
+        const c1 = document.getElementById("countdown");
+        const c2 = document.getElementById("countdown2");
+        if(c1) c1.innerHTML = clock;
+        if(c2) c2.innerHTML = clock;
     }, 1000);
 }
+
 startCountdown();
