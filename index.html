@@ -6,6 +6,37 @@
     <title>AFRO NUTRITION | Guide de Transformation</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styles pour le champ Code Promo */
+        .promo-container {
+            margin: 15px 0;
+            text-align: left;
+        }
+        .promo-label {
+            display: block;
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .promo-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            text-transform: uppercase; /* Force les majuscules visuellement */
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        .promo-input:focus {
+            border-color: #FFD700; /* Jaune or comme ton thème */
+        }
+        .btn-whatsapp {
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
    <div class="promo-banner">
@@ -130,7 +161,7 @@
                         <p>Plans alimentaires structurés</p>
                     </div>
                     <div class="slide">
-                        <img src="images/page3.png" alt="Extrait Page 3">
+                        <img src="images/page3.jpg" alt="Extrait Page 3">
                         <p>Conseils nutritionnels locaux</p>
                     </div>
                 </div>
@@ -198,8 +229,15 @@
                     <p id="method-title"></p>
                     <p><strong>Numéro :</strong> <span id="phone-number">06 574 93 58</span></p>
                     <p><strong>Nom :</strong> <span id="account-name">Balleya Joy Ephraim</span></p>
-                    <hr>
-                    <p class="final-step">Une fois le transfert effectué, cliquez sur le bouton ci-dessous pour m'envoyer la preuve sur WhatsApp et recevoir le livre.</p>
+                    
+                    <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
+                    
+                    <div class="promo-container">
+                        <label for="promoCode" class="promo-label">As-tu un code promo influenceur ?</label>
+                        <input type="text" id="promoCode" class="promo-input" placeholder="Ex: MARC10">
+                    </div>
+
+                    <p class="final-step">Une fois le transfert effectué, cliquez sur le bouton ci-dessous pour m'envoyer la preuve et recevoir le livre.</p>
                     <button class="btn-whatsapp" onclick="sendWhatsAppConfirmation()">✅ J'ai payé, envoyer la preuve</button>
                 </div>
 
@@ -244,23 +282,5 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-  // Désactive le clic droit
-  document.addEventListener('contextmenu', e => e.preventDefault());
-
-  // Désactive les touches de raccourci (F12, Ctrl+Shift+I, etc.)
-  document.onkeydown = function(e) {
-    if (e.keyCode == 123 || 
-        (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0) || e.keyCode == 'C'.charCodeAt(0))) || 
-        (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) {
-      return false;
-    }
-  };
-</script>
 </body>
-
 </html>
-
-
-
-
